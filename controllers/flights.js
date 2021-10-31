@@ -14,7 +14,7 @@ function newFlight(req, res) {
 
 function create(req, res) {
   for (let key in req.body) {
-	  if (req.body[key] === '') delete req.body[key]
+    if (req.body[key] === '') delete req.body[key]
 	}
   if (req.body.departs === null) {
     const newFlight = new Flight();
@@ -23,14 +23,9 @@ function create(req, res) {
   // Format the date for the value attribute of the input
     const departsDate = dt.toISOString().slice(0, 16);
   res.render('flights/new', {departsDate});
-    // const newFlight = new Flight()
     req.body.departs = newFlight.departs
   }
-  // const flight = new Flight(req.body)
-  // flight.save(function(err) {
-  //   if(err) return res.redirect('flights/new')
-  // res.redirect('flights/index')
-  // })
+
 
   Flight.create(req.body, function(error, flight){
     if (error) {

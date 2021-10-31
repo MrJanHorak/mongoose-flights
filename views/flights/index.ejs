@@ -1,5 +1,7 @@
 <%- include('../partials/header') %>
 
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
 <%- include('../partials/nav') %>
 
   <h1>Mongoose Flights</h1>
@@ -18,7 +20,9 @@
           <td><%= f.airline %></td>
           <td><%= f.airport %></td>
           <td><%= f.flightNo %></td>
-          <td><%= f.departs %></td>
+          <td class="<%- (f.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
+            <%= f.departs %>
+          </td>
         </tr>
       <% }) %>
     </tbody>
