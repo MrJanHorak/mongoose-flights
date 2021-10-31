@@ -36,8 +36,23 @@ function create(req, res) {
   })
 }
 
+function show(req,res) {
+  Flight.findById(req.params.id,
+  function(error, flight){
+    console.log("Following error has popped up:", error)
+    res.render('flights/show',{
+      flight
+    })
+  })
+}
+
+function addTicket(req,res){
+  console.log('I am adding a ticket')
+}
 export {
   index,
   newFlight as new,
   create,
+  show,
+  addTicket,
 }

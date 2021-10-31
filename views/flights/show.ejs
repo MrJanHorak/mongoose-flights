@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+<%- include('../partials/nav') %>
+<main>
+  <section>
+  <DIV>Flight Details:</DIV>
+  <DIV>
+    
+  <table>
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Airport</th>
+        <th>Flight Number</th>
+        <th>Departure Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= flight.airline %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.flightNo %></td>
+        <td class="<%- (flight.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
+          <%= flight.departs %>
+        </td>
+        </tr>
+    </tbody>
+  </table>
+  </DIV>
+  
+</section>
+<h2>Tickets</h2>
+  <form 
+    id="add-ticket-form"
+    action="/flights/<%= flight._id %>/tickets"
+    method="POST">
+  <label for="content-input">Seat:</label>
+  <input name="seat" required pattern="[A-F][1-9]\d?">  
+  <label for="content-input">Price:</label>
+  <input name="price" required pattern="^[0-9]*$" min=0>  
+  <button type="submit">Add Ticket</button>
+  </form>
+  <% if (flight.tickets.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Seat</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.tickets.forEach(function(ticket) { %>
+          <tr>
+            <td><%= tickets.createdAt.toLocaleDateString() %></td>
+            <td><%= tickets.seat %></td>
+            <td><%= tickets.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h3>No Tickets Yet</h3>
+  <% } %>
+</main>
+
+
+<%- include('../partials/footer') %>

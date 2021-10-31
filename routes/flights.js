@@ -5,7 +5,9 @@ const router = Router()
 /* GET users listing. */
 router.get('/', flightsCtrl.index)
 router.get('/new', flightsCtrl.new)
+router.get('/:id', flightsCtrl.show)
 router.post('/', flightsCtrl.create)
+router.post('/:id/tickets', flightsCtrl.addTicket)
 
 export {
   router
