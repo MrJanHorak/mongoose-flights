@@ -1,0 +1,36 @@
+table {
+  width: 60%;
+  background-color: rgba(rgb(116, 165, 180), green, blue, .6);
+  font-size: 1.3em;
+  margin:auto;
+}
+
+table thead th {
+  padding: 5px;
+  border-bottom: 1.5px solid blue;
+}
+
+table td {
+  padding: 10px;
+  text-align: center;
+}
+
+td:nth-child(1) {
+max-width: 76px;
+min-width: 75px;
+}
+td:nth-child(2),
+td:nth-child(3) {
+max-width: 61px;
+min-width: 60px;
+}
+td:nth-child(4) {
+  max-width: 520px;
+  min-width: 520px;
+}
+
+.addTickets {
+  text-align: center;
+  margin:auto;
+  padding: 25px;
+}
