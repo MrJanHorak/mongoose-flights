@@ -9,7 +9,7 @@ router.get('/:id', flightsCtrl.show)
 router.post('/', flightsCtrl.create)
 router.post('/:id/tickets', flightsCtrl.addTicket)
 router.delete('/:id', flightsCtrl.delete)
-router.delete('/tickets/:id', flightsCtrl.deleteTicket)
+router.delete('/:flightId/tickets/:ticketId', flightsCtrl.deleteTicket)
 
 export {
   router

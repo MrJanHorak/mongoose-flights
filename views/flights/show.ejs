@@ -37,7 +37,7 @@
     id="add-ticket-form"
     action="/flights/<%= flight._id %>/tickets"
     method="POST">
-  <label for="content-input">Seat:</label>
+  <label for="content-input">Seat  (A1 - F99):</label>
   <input name="seat" required pattern="[A-F][1-9]\d?">  
   <label for="content-input">Price:</label>
   <input name="price" required pattern="^[0-9]*$" min=0>  
@@ -50,6 +50,7 @@
         <tr>
           <th>Seat</th>
           <th>Price</th>
+          <th>Delete Ticket</th>
         </tr>
       </thead>
       <tbody>
@@ -57,6 +58,10 @@
           <tr>
             <td><%= ticket.seat %></td>
             <td>$<%= ticket.price %></td>
+            <td>
+              <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
+              <button class="delete" >X</button></form>
+            </td>
           </tr>
         <% }) %>
       </tbody>
