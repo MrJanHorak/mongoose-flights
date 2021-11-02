@@ -1,11 +1,15 @@
 table {
-  width: 60%;
-  background-color: rgba(rgb(116, 165, 180), green, blue, .6);
   font-size: 1.3em;
   margin:auto;
   color: white;
 }
 
+main {
+  color: white;
+  text-align: center;
+  background-color: rgba(255,255,255, 0.1);
+  border-radius: 10px;
+}
 table thead th {
   padding: 5px;
   border-bottom: 1.5px solid blue;

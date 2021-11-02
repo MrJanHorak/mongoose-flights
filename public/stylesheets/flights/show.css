@@ -1,13 +1,12 @@
+main {
+  color: white;
+  text-align: center;
+}
+
 table {
-  width: 60%;
-  background-color: rgba(rgb(116, 165, 180), green, blue, .6);
   font-size: 1.3em;
   margin:auto;
   color: white;
-}
-
-a {
-  color: grey;
 }
 
 table thead th {
