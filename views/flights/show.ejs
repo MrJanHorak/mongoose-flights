@@ -4,10 +4,9 @@
 
 <%- include('../partials/nav') %>
 <main>
-  <h1>Flight Details:</h1>
+  <div class="flight-details">
   <section>
-  <div>
-    
+  <h1>Flight Details:</h1>
   <table>
     <thead>
       <tr>
@@ -29,35 +28,40 @@
     </tbody>
   </table>
 </div>
-<div><h1>Destinations:</h1></div>
-<table>
-  <thead>
-    <tr>
-      <th>Destination</th>
-      <th>Delete destination</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% flight.destinations.forEach(function(destination) { %>
+<br/>
+<br/>
+<div class="destinations-list">
+  <h1>Destinations:</h1>
+  <table>
+    <thead>
       <tr>
-        <td><%= destination.airport %></td>
-        <td>
-          <form action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE" method="POST">
-          <button class="delete" >X</button></form>
-        </td>
+        <th>Destination</th>
+        <th>Delete destination</th>
       </tr>
-    <% }) %>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody>
+      <% flight.destinations.forEach(function(destination) { %>
+        <tr>
+          <td><%= destination.airport %></td>
+          <td>
+            <form action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE" method="POST">
+            <button class="delete" >X</button></form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+    <form id="add-des-to-flight" action="/flights/<%= flight._id %>/destinations" method="POST">
+    <select name="destinationId">
+      <%- destinationsNotinList.map(d => `<option value="${d._id}">${d.airport}</option>`).join('') %>
+    </select>
+    <button type="submit">Add to Flight</button>
+  </form>
 </section>
+</div>
 
-<form id="add-des-to-flight" action="/flights/<%= flight._id %>/destinations" method="POST">
-  <select name="destinationId">
-    <%- destinationsNotinList.map(d => `<option value="${d._id}">${d.airport}</option>`).join('') %>
-  </select>
-  <button type="submit">Add to Flight</button>
-</form>
+<br/><br/>
 
 <div class="addTickets">
 <h2>Tickets</h2>
@@ -71,33 +75,36 @@
   <input name="price" required pattern="^[0-9]*$" min=0>  
   <button type="submit">Add Ticket</button>
   </form>
-</div>
-  <% if (flight.tickets.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Seat</th>
-          <th>Price</th>
-          <th>Delete Ticket</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% flight.tickets.forEach(function(ticket) { %>
+  
+  <div class="flight-tickets">
+    <% if (flight.tickets.length) { %>
+      <table>
+        <thead>
           <tr>
-            <td><%= ticket.seat %></td>
-            <td>$<%= ticket.price %></td>
-            <td>
-              <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
-              <button class="delete" >X</button></form>
-            </td>
+            <th>Seat</th>
+            <th>Price</th>
+            <th>Delete Ticket</th>
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } else { %>
-    <h3>No Tickets Yet</h3>
-  <% } %>
-</main>
-
-
-<%- include('../partials/footer') %>
+        </thead>
+        <tbody>
+          <% flight.tickets.forEach(function(ticket) { %>
+            <tr>
+              <td><%= ticket.seat %></td>
+              <td>$<%= ticket.price %></td>
+              <td>
+                <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
+                  <button class="delete" >X</button></form>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+          <% } else { %>
+            <h3>No Tickets Yet</h3>
+            <% } %>
+          </div>  
+        </div>
+        </main>
+        
+        
+        <%- include('../partials/footer') %>

@@ -33,8 +33,41 @@ td:nth-child(4) {
   min-width: 520px;
 }
 
+.flight-details {
+  color: white;
+  text-align: center;
+  background-color: rgba(255,255,255, 0.1);
+  border-radius: 10px;
+  width: 850px;
+  margin: auto;
+  padding: 5px;;
+  font-size: 1.1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.destinations-list {
+  color: white;
+  text-align: center;
+  background-color: rgba(255,255,255, 0.1);
+  border-radius: 10px;
+  width: 850px;
+  margin: auto;
+  padding: 5px;;
+  font-size: .9rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
 .addTickets {
   text-align: center;
   margin:auto;
   padding: 25px;
+  color: white;
+  text-align: center;
+  background-color: rgba(255,255,255, 0.1);
+  border-radius: 10px;
+  width: 850px;
+  margin: auto;
+  padding: 5px;;
+  font-size: .9rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2), inset 0 0 1px rgba(255, 255, 255, 0.1);
 }

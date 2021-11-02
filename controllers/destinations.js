@@ -1,16 +1,23 @@
 import { Destination } from '../models/destination.js'
 
 function newDestination(req, res) {
-  Destination.find({}, function (err, destinations) {
+  Destination.find({}, function (error, destinations) {
     res.render('destinations/new', {
-      destinations
+      destinations,
+      error: req.body.error ? rec.body.error : error
     })
   })
 }
 
 function create(req, res) {
-  Destination.create(req.body, function (err, destination) {
-    res.redirect('/destinations/new')
+  Destination.findOne({airport: req.body.airport}, function(error, destination) {
+    if (destination === null) {
+      Destination.create(req.body, function (error, destination){
+        res.redirect('/destinations/new')
+      })
+    } else {
+      res.redirect('/destinations/new?error=true')
+    }
   })
 }
 

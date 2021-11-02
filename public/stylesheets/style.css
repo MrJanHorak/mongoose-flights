@@ -1,10 +1,13 @@
 html {
   height:100%;
   background-image: linear-gradient(to right top, #4469ad 0%, #64b7ee 100%);
+  background-attachment: fixed;
 }
+
 body {
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 a {
@@ -52,4 +55,16 @@ nav ul li a:hover {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(0, 35, 122, 0.8);
   border-radius: 25px;
+}
+
+.fa-plane {
+  font-size: 250px;
+  color: white;
+  transform: rotate(-30deg);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.airplane {
+  margin: auto;
+  margin-top: 50px;
 }
