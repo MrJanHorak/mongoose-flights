@@ -6,7 +6,7 @@
 <main>
   <h1>Flight Details:</h1>
   <section>
-  <DIV>
+  <div>
     
   <table>
     <thead>
@@ -28,9 +28,37 @@
         </tr>
     </tbody>
   </table>
-  </DIV>
-  
+</div>
+<div>Destinations:</div>
+<table>
+  <thead>
+    <tr>
+      <th>Destination</th>
+      <th>Delete Ticket</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% flight.destinations.forEach(function(destination) { %>
+      <tr>
+        <td><%= destination.airport %></td>
+        <td>
+          <form action="/flights/<%= flight._id %>/destinations/<%= destination._id %>?_method=DELETE" method="POST">
+          <button class="delete" >X</button></form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
 </section>
+
+<form id="add-des-to-flight" action="/flights/<%= flight._id %>/destinations" method="POST">
+  <select name="destinationId">
+    <%- destinationsNotinList.map(d => `<option value="${d._id}">${d.airport}</option>`).join('') %>
+  </select>
+  <button type="submit">Add to Flight</button>
+</form>
+
 <div class="addTickets">
 <h2>Tickets</h2>
   <form 
