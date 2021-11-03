@@ -6,33 +6,38 @@
 <main>
   <div class="flight-details">
   <section>
-  <h1>Flight Details:</h1>
+  <h1>Flight #<%= flight.flightNo %> Details:</h1>
   <table>
     <thead>
       <tr>
         <th>Airline</th>
         <th>Airport</th>
-        <th>Flight #</th>
         <th>Departure Date</th>
+        <th>Departure Time</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="<%- (flight.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
         <td><%= flight.airline %></td>
         <td><%= flight.airport %></td>
-        <td><%= flight.flightNo %></td>
-        <td class="<%- (flight.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
-          <%= flight.departs %>
-        </td>
-        </tr>
+        <td><%= departDate %></td>
+        <td><%= departTime %></td>
+      </tr>
     </tbody>
   </table>
 </div>
 <br/>
 <br/>
 <div class="destinations-list">
-  <h1>Destinations:</h1>
-  <table>
+  <h2>Destinations:</h2>
+  <form id="add-des-to-flight" action="/flights/<%= flight._id %>/destinations" method="POST">
+    <select name="destinationId">
+      <%- destinationsNotinList.map(d => `<option value="${d._id}">${d.airport}</option>`).join('') %>
+    </select>
+    <button type="submit">Add to Flight</button>
+  </form>
+
+  <table class="destination-table">
     <thead>
       <tr>
         <th>Destination</th>
@@ -51,13 +56,6 @@
       <% }) %>
     </tbody>
   </table>
-  
-    <form id="add-des-to-flight" action="/flights/<%= flight._id %>/destinations" method="POST">
-    <select name="destinationId">
-      <%- destinationsNotinList.map(d => `<option value="${d._id}">${d.airport}</option>`).join('') %>
-    </select>
-    <button type="submit">Add to Flight</button>
-  </form>
 </section>
 </div>
 
@@ -69,42 +67,41 @@
     id="add-ticket-form"
     action="/flights/<%= flight._id %>/tickets"
     method="POST">
-  <label for="content-input">Seat  (A1 - F99):</label>
-  <input name="seat" required pattern="[A-F][1-9]\d?">  
-  <label for="content-input">Price:</label>
-  <input name="price" required pattern="^[0-9]*$" min=0>  
-  <button type="submit">Add Ticket</button>
+    <label for="content-input">Seat  (A1 - F99):</label>
+    <input name="seat" required pattern="[A-F][1-9]\d?">
+    <label for="content-input">Price:</label>
+    <input name="price" required pattern="^[0-9]*$" min=0>
+    <button type="submit">Add Ticket</button>
   </form>
   
-  <div class="flight-tickets">
-    <% if (flight.tickets.length) { %>
-      <table>
-        <thead>
+<div class="flight-tickets">
+  <% if (flight.tickets.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Seat</th>
+          <th>Price</th>
+          <th>Delete Ticket</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.tickets.forEach(function(ticket) { %>
           <tr>
-            <th>Seat</th>
-            <th>Price</th>
-            <th>Delete Ticket</th>
+            <td><%= ticket.seat %></td>
+            <td>$<%= ticket.price %></td>
+            <td>
+              <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
+                <button class="delete" >X</button></form>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% flight.tickets.forEach(function(ticket) { %>
-            <tr>
-              <td><%= ticket.seat %></td>
-              <td>$<%= ticket.price %></td>
-              <td>
-                <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST">
-                  <button class="delete" >X</button></form>
-                </td>
-              </tr>
-              <% }) %>
-            </tbody>
-          </table>
-          <% } else { %>
-            <h3>No Tickets Yet</h3>
-            <% } %>
-          </div>  
-        </div>
-        </main>
-        
-        
-        <%- include('../partials/footer') %>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h3>No Tickets Yet</h3>
+  <% } %>
+</div>  
+</div>
+</main>
+      
+<%- include('../partials/footer') %>

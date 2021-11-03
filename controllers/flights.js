@@ -4,13 +4,21 @@ import {Destination} from '../models/destination.js'
 function index(req, res) {
   
   Flight.find({}).sort({departs: 'asc'}).exec(function(error, flights) {
-    if (error) return res.render('movies/index', flights)
+    let dt = flights.departs
+    // const departDate = dt.toString().slice(0, 15);
+    // const departTime = dt.toString().slice(16,21);
+    if (error) return res.render('flights/index', flights)
     res.render('flights/index', {flights})
   })
 }
 
 function newFlight(req, res) {
-  res.render('flights/new')
+  const newFlight = new Flight();
+  // Obtain the default date
+  const dt = newFlight.departs;
+  // Format the date for the value attribute of the input
+  const departsDate = dt.toISOString().slice(0, 16);
+  res.render('flights/new', {departsDate});
 }
 
 function create(req, res) {
@@ -42,11 +50,16 @@ function show(req,res) {
   Flight.findById(req.params.id)
   .populate("destinations")
   .exec(function(err, flight) {
+    const dt = flight.departs
+    const departDate = dt.toString().slice(0, 15);
+    const departTime = dt.toString().slice(16,21);
     Destination.find({_id: {$nin: flight.destinations}}, function(err, destinationsNotinList){
         console.log("Following error has popped up:", err)
         res.render('flights/show',{
           flight,
-          destinationsNotinList
+          destinationsNotinList,
+          departDate,
+          departTime
         })
       })
   })
@@ -59,7 +72,6 @@ function addTicket(req,res){
       flight.tickets.push(req.body)
       flight.save(function(error){
         res.redirect(`/flights/${flight._id}`)
-      
     })
 })
 }

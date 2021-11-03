@@ -4,6 +4,14 @@ html {
   background-attachment: fixed;
 }
 
+h1 {
+  color: yellow;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: yellow;
+}
 body {
   padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -15,11 +23,13 @@ a {
 }
 
 .pastDate {
-  color: red;
+  color: rgb(153, 30, 30);
 }
 
 .delete {
-  color: red;
+  color:white;
+  border-radius: 50%;
+  background-color: rgb(153, 30, 30);
 }
 
 nav {

@@ -11,7 +11,8 @@ main {
 }
 
 table {
-  font-size: 1em;
+  font-size: .8em;
+  font-weight: bold;
   margin:auto;
   color: white;
 }
@@ -36,11 +37,16 @@ max-width: 61px;
 min-width: 60px;
 }
 td:nth-child(4) {
-  max-width: 326px;
-  min-width: 325px;
+  max-width: 260px;
+  min-width: 260px;
 }
 td:nth-child(5),
 td:nth-child(6) {
-  max-width: 106px;
-  min-width: 105px;
+  max-width: 70px;
+  min-width: 70px;
+}
+
+td {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
 }

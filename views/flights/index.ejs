@@ -12,20 +12,20 @@
         <th>Airport</th>
         <th>Flight #</th>
         <th>Departure Date</th>
+        <th>Departure Time</th>
         <th>Flight Details</th>
         <th>Delete Flight</th>
       </tr>
     </thead>
     <tbody>
       <% flights.forEach(f => { %>
-        <tr>
+        <tr class="<%- (f.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
           <td><%= f.airline %></td>
           <td><%= f.airport %></td>
           <td><%= f.flightNo %></td>
-          <td class="<%- (f.departs) <= Date.now() ? "pastDate" : "futureDate" %>">
-            <%= f.departs %>
-          </td>
-          <td><a href="/flights/<%= f._id %>">Details</a></td>
+          <td><%= f.departs.toString().slice(0,16) %></td>
+          <td><%= f.departs.toString().slice(16,21) %></td>
+          <td ><a style="<%= (f.departs) <= Date.now() ?"color:rgb(153, 30, 30)" : "color:white"%>" href="/flights/<%= f._id %>">Details</a></td>
           <td>
             <form action="/flights/<%= f._id %>?_method=DELETE" method="POST">
             <button class="delete" >X</button></form>

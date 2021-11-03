@@ -4,7 +4,7 @@ function newDestination(req, res) {
   Destination.find({}, function (error, destinations) {
     res.render('destinations/new', {
       destinations,
-      error: req.body.error ? rec.body.error : error
+      error: req.query.error ? req.query.error : error
     })
   })
 }
